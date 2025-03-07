@@ -1,0 +1,30 @@
+@use "../variables" as *;
+.filters {
+  background: $color-secondary;
+  border-radius: 12px;
+  padding: 12px;
+  margin-bottom: 32px;
+  &__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &__content {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    .form-group {
+      &:first-child {
+        input {
+          width: 100%;
+        }
+      }
+      input:not(.select__search) {
+        border-radius: 8px;
+      }
+      .select__options {
+        top: 52px;
+      }
+    }
+  }
+}

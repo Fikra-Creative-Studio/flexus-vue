@@ -1,0 +1,46 @@
+@use "../variables" as *;
+.banner {
+  position: relative;
+  height: calc(100vh - 40px);
+  width: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  &:after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    background-color: RGBA(0, 0, 0, 0.4);
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__content {
+    position: absolute;
+    bottom: 60px;
+    left: 120px;
+    min-width: 60%;
+    z-index: 2;
+    h2,
+    p {
+      font-family: $font-primary;
+      color: $color-white;
+    }
+    h2 {
+      font-size: clamp(2.5em, -1.5em + 5vw, 4.5em);
+      font-weight: 600;
+      line-height: 1.2em;
+    }
+    p {
+      font-size: clamp(2em, 0em + 2.5vw, 3em);
+      font-weight: 200;
+      line-height: 1.4em;
+      margin-top: 8px;
+    }
+  }
+}

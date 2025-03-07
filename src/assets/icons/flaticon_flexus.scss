@@ -1,0 +1,69 @@
+$flaticon_flexus-font: "flaticon_flexus";
+
+@font-face {
+    font-family: $flaticon_flexus-font;
+    src: url("./flaticon_flexus.woff2?7959da19aea432e64af4f0e5258b6c6d") format("woff2"),
+url("./flaticon_flexus.woff?7959da19aea432e64af4f0e5258b6c6d") format("woff"),
+url("./flaticon_flexus.eot?7959da19aea432e64af4f0e5258b6c6d#iefix") format("embedded-opentype"),
+url("./flaticon_flexus.ttf?7959da19aea432e64af4f0e5258b6c6d") format("truetype"),
+url("./flaticon_flexus.svg?7959da19aea432e64af4f0e5258b6c6d#flaticon_flexus") format("svg");
+}
+
+i[class^="flaticon-"]:before, i[class*=" flaticon-"]:before {
+    font-family: flaticon_flexus !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+$flaticon_flexus-map: (
+    "export": "\f101",
+    "export-1": "\f102",
+    "edit-text": "\f103",
+    "edit": "\f104",
+    "export-2": "\f105",
+    "attention": "\f106",
+    "exclamation": "\f107",
+    "trash": "\f108",
+    "x": "\f109",
+    "chevron-down": "\f10a",
+    "down-arrow": "\f10b",
+);
+
+.flaticon-export:before {
+    content: map-get($flaticon_flexus-map, "export");
+}
+.flaticon-export-1:before {
+    content: map-get($flaticon_flexus-map, "export-1");
+}
+.flaticon-edit-text:before {
+    content: map-get($flaticon_flexus-map, "edit-text");
+}
+.flaticon-edit:before {
+    content: map-get($flaticon_flexus-map, "edit");
+}
+.flaticon-export-2:before {
+    content: map-get($flaticon_flexus-map, "export-2");
+}
+.flaticon-attention:before {
+    content: map-get($flaticon_flexus-map, "attention");
+}
+.flaticon-exclamation:before {
+    content: map-get($flaticon_flexus-map, "exclamation");
+}
+.flaticon-trash:before {
+    content: map-get($flaticon_flexus-map, "trash");
+}
+.flaticon-x:before {
+    content: map-get($flaticon_flexus-map, "x");
+}
+.flaticon-chevron-down:before {
+    content: map-get($flaticon_flexus-map, "chevron-down");
+}
+.flaticon-down-arrow:before {
+    content: map-get($flaticon_flexus-map, "down-arrow");
+}

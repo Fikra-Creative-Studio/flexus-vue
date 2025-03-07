@@ -1,0 +1,55 @@
+@use "../variables" as *;
+.btn {
+  width: 100%;
+  font-size: 1em;
+  font-weight: 700;
+  padding: 12px 0 11px;
+  transition: 0.3s ease-in-out;
+  border: 0px none;
+  border-radius: 20px;
+  text-transform: uppercase;
+  cursor: pointer;
+  text-decoration: none;
+  &--iconed {
+    padding: 12px 20px 11px;
+    display: inline-flex;
+    gap: 8px;
+    align-items: center;
+  }
+  &--primary {
+    background-color: $color-brand;
+    color: $color-white;
+    transition: 0.3s ease-in-out;
+    &:hover {
+      filter: brightness(1.5);
+    }
+  }
+  &--secondary {
+    background-color: $color-white;
+    color: $color-brand;
+    border: 1px solid $color-brand;
+    transition: 0.3s ease-in-out;
+    &:hover {
+      filter: brightness(1.5);
+    }
+  }
+  &--black {
+    background-color: $color-black;
+    color: $color-white;
+  }
+  &--brown {
+    background-color: transparent;
+    color: $color-brown;
+    border: 1px solid $color-brown;
+    transition: 0.3s ease-in-out;
+    &:hover {
+      background-color: $color-brown;
+      color: $color-white;
+    }
+  }
+  &--full {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+}

@@ -2,5 +2,59 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
+import { mask } from "vue-the-mask";
+import axios from "axios";
+import VueCookies from "vue-cookies";
+import Swal from "sweetalert2";
 
-createApp(App).use(store).use(router).mount("#app");
+const app = createApp(App);
+
+app.directive("mask", mask);
+app.use(store).use(router).use(VueCookies).mount("#app");
+
+app.config.globalProperties.$http = axios.create({
+  baseURL: "https://apidev.flexus.app.br/api",
+});
+
+app.config.globalProperties.$http.interceptors.request.use(
+  config => {
+    const token = VueCookies.get("token");
+    if (
+      token &&
+      ![
+        "/login",
+        "/create",
+        "/forgot-password",
+        "/reset-password",
+        "/confirm-account",
+        "/confirmed-account",
+      ].includes(config.url)
+    ) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  error => {
+    return Promise.reject(error);
+  }
+);
+app.config.globalProperties.$swal = Swal;
+
+router.beforeEach((to, from, next) => {
+  const token = VueCookies.get("token");
+  if (
+    !token &&
+    ![
+      "/login",
+      "/create",
+      "/forgot-password",
+      "/reset-password",
+      "/confirm-account",
+      "/confirmed-account",
+    ].includes(to.path)
+  ) {
+    next("/login");
+  } else {
+    next();
+  }
+});

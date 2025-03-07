@@ -1,5 +1,17 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
+import LoginView from "../views/LoginView.vue";
+import CreateView from "../views/CreateView.vue";
+import ConfirmAccount from "../views/ConfirmAccount.vue";
+import ConfirmedAccount from "../views/ConfirmedAccount.vue";
+import ForgotPassword from "../views/ForgotPassword.vue";
+import ResetPassword from "../views/ResetPassword.vue";
+import ModuloView from "../views/ModuloView.vue";
+import ItemView from "../views/ItemView.vue";
+import StepsView from "../views/StepsView.vue";
+import CompaniesView from "../views/CompaniesView.vue";
+import EmployeesView from "../views/EmployeesView.vue";
+import ClientsView from "../views/ClientsView.vue";
 
 const routes = [
   {
@@ -8,13 +20,64 @@ const routes = [
     component: HomeView,
   },
   {
-    path: "/about",
-    name: "about",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
+    path: "/login",
+    name: "login",
+    component: LoginView,
+  },
+  {
+    path: "/create",
+    name: "create",
+    component: CreateView,
+  },
+  {
+    path: "/confirm-account",
+    name: "confirm-account",
+    component: ConfirmAccount,
+  },
+  {
+    path: "/confirmed-account",
+    name: "confirmed-account",
+    component: ConfirmedAccount,
+  },
+  {
+    path: "/forgot-password",
+    name: "forgot-password",
+    component: ForgotPassword,
+  },
+  {
+    path: "/reset-password",
+    name: "reset-password",
+    component: ResetPassword,
+  },
+  {
+    path: "/modules",
+    name: "modules",
+    component: ModuloView,
+  },
+  {
+    path: "/modules/:id/items",
+    name: "items",
+    component: ItemView,
+  },
+  {
+    path: "/empresas",
+    name: "empresas",
+    component: CompaniesView,
+  },
+  {
+    path: "/funcionarios",
+    name: "funcionarios",
+    component: EmployeesView,
+  },
+  {
+    path: "/clientes",
+    name: "clientes",
+    component: ClientsView,
+  },
+  {
+    path: "/etapas",
+    name: "etapas",
+    component: StepsView,
   },
 ];
 

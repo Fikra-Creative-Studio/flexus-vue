@@ -12,11 +12,7 @@
         />
       </div>
 
-      <LoadingButton
-        :text="'enviar'"
-        :loading="loading"
-        @click="handleSubmit"
-      />
+      <LoadingButton :text="'enviar'" :loading="loading" />
     </form>
     <div v-else>
       <h2>e-mail enviado</h2>

@@ -1,14 +1,14 @@
 @font-face {
   font-family: "flaticon_flexus";
-  src: url("/src/assets/icons/flaticon_flexus.woff2?7959da19aea432e64af4f0e5258b6c6d")
+  src: url("/src/assets/icons/flaticon_flexus.woff2?da911ba2a24ae661acff02a660f3bfdc")
       format("woff2"),
-    url("/src/assets/icons/flaticon_flexus.woff?7959da19aea432e64af4f0e5258b6c6d")
+    url("/src/assets/icons/flaticon_flexus.woff?da911ba2a24ae661acff02a660f3bfdc")
       format("woff"),
-    url("/src/assets/icons/flaticon_flexus.eot?7959da19aea432e64af4f0e5258b6c6d#iefix")
+    url("/src/assets/icons/flaticon_flexus.eot?da911ba2a24ae661acff02a660f3bfdc#iefix")
       format("embedded-opentype"),
-    url("/src/assets/icons/flaticon_flexus.ttf?7959da19aea432e64af4f0e5258b6c6d")
+    url("/src/assets/icons/flaticon_flexus.ttf?da911ba2a24ae661acff02a660f3bfdc")
       format("truetype"),
-    url("/src/assets/icons/flaticon_flexus.svg?7959da19aea432e64af4f0e5258b6c6d#flaticon_flexus")
+    url("/src/assets/icons/flaticon_flexus.svg?da911ba2a24ae661acff02a660f3bfdc#flaticon_flexus")
       format("svg");
 }
 
@@ -56,4 +56,25 @@ i[class*=" flaticon-"]:before {
 }
 .flaticon-down-arrow:before {
   content: "\f10b";
+}
+.flaticon-check:before {
+  content: "\f10c";
+}
+.flaticon-access-granted:before {
+  content: "\f10d";
+}
+.flaticon-permission:before {
+  content: "\f10e";
+}
+.flaticon-manager:before {
+  content: "\f10f";
+}
+.flaticon-user-avatar:before {
+  content: "\f110";
+}
+.flaticon-like:before {
+  content: "\f111";
+}
+.flaticon-check-1:before {
+  content: "\f112";
 }

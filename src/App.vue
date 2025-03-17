@@ -122,6 +122,14 @@ button {
   min-height: 100vh;
   display: flex;
   padding: 20px;
+  &--aside {
+    aside {
+      z-index: 3 !important;
+    }
+    main {
+      z-index: 2 !important;
+    }
+  }
   &--inverse {
     flex-direction: row-reverse;
     .banner {
@@ -205,6 +213,7 @@ button {
   main {
     position: sticky;
     top: 20px;
+    z-index: 2;
   }
 }
 </style>

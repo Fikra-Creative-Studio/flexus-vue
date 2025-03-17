@@ -11,6 +11,7 @@
 
 <script>
 import FeedbackMessage from "@/components/FeedbackMessage.vue";
+import { formatCPNJ } from "@/utils/utils.js";
 import { mapGetters } from "vuex";
 export default {
   components: {
@@ -19,11 +20,7 @@ export default {
   computed: {
     ...mapGetters(["getUsuario"]),
     cnpjFormatado() {
-      if (!this.getUsuario?.cnpj) return "";
-      return this.getUsuario.cnpj.replace(
-        /^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})$/,
-        "$1.$2.$3/$4-$5"
-      );
+      return formatCPNJ(this.getUsuario.cnpj);
     },
   },
   created() {

@@ -1,0 +1,12 @@
+@use "../variables" as *;
+.alert {
+  background-color: $color-brown;
+  padding: 10px 20px;
+  margin-bottom: 24px;
+  border-radius: 8px;
+  p {
+    color: $color-white;
+    font-size: 0.875em;
+    text-align: center;
+  }
+}

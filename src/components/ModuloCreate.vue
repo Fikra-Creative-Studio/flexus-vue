@@ -1,5 +1,26 @@
 <template>
   <form @submit.prevent="handleSubmit" class="modulo-form">
+    <TheModal @close="resetModal">
+      <h2>adicionar lote</h2>
+      <form @submit.prevent="submitLote" modalType="second">
+        <div class="modal__form">
+          <InputType
+            label="lote"
+            :error="errors.newLote"
+            placeholder="digite o nome do lote"
+            v-model="fields.newLote"
+            type="text"
+            class="gold"
+          />
+        </div>
+        <div class="modal__buttons">
+          <a href="" @click.prevent="resetModal()" class="btn btn--secondary"
+            >cancelar</a
+          >
+          <LoadingButton :text="'cadastrar'" :loading="saveLoading" />
+        </div>
+      </form>
+    </TheModal>
     <div class="modulo-form__fields">
       <InputType
         label="nome"
@@ -18,15 +39,18 @@
         :items="clientsFormated"
         class="gold"
       />
-      <SelectType
-        label="lote"
-        :error="errors.lote"
-        placeholder="selecione o lote"
-        v-model="fields.lote"
-        :current="fields.lote"
-        :items="lotsFormated"
-        class="gold"
-      />
+      <div class="modulo-form__fields__lot">
+        <a @click.prevent="showModal"> adicionar lote </a>
+        <SelectType
+          label="lote"
+          :error="errors.lote"
+          placeholder="selecione o lote"
+          v-model="fields.lote"
+          :current="fields.lote"
+          :items="lotsFormated"
+          class="gold"
+        />
+      </div>
     </div>
     <div class="modulo-form__buttons">
       <LoadingButton
@@ -47,20 +71,28 @@
 import InputType from "@/objects/InputType.vue";
 import SelectType from "@/objects/SelectType.vue";
 import LoadingButton from "@/components/LoadingButton.vue";
-import { formatSelect } from "@/utils/utils.js";
+import TheModal from "@/components/TheModal.vue";
+import { formatSelect, handleAxiosError } from "@/utils/utils.js";
 import { validate } from "@/utils/validation.js";
+import { mapActions } from "vuex";
 
 export default {
   data() {
     return {
       isEditing: false,
       loading: false,
+      saveLoading: false,
       fields: {
+        newLote: null,
         nome: null,
         cliente: null,
         lote: null,
       },
       errors: {
+        newLote: {
+          status: false,
+          msg: null,
+        },
         nome: {
           status: false,
           msg: null,
@@ -82,6 +114,7 @@ export default {
     InputType,
     SelectType,
     LoadingButton,
+    TheModal,
   },
   computed: {
     clientsFormated() {
@@ -91,10 +124,45 @@ export default {
       return formatSelect(this.lots, "nome", "id");
     },
   },
+  watch: {
+    $route(to, from) {
+      if (from.params.id === "new" && to.params.id !== "new") {
+        this.init();
+      }
+    },
+  },
   methods: {
+    ...mapActions("modal", ["openSecondModal", "closeSecondModal"]),
+    showModal() {
+      this.openSecondModal();
+    },
+    resetModal() {
+      this.fields.newLote = null;
+      this.closeSecondModal();
+    },
+    async submitLote() {
+      const { isValid, erros } = validate({ newLote: this.fields.newLote });
+      this.errors.newLote = erros.newLote;
+      if (!isValid) return;
+      this.saveLoading = true;
+      try {
+        const response = await this.$http.post("/Lote/Cadastrar", {
+          nome: this.fields.newLote,
+        });
+        this.lots.push(response.data);
+        this.fields.lote = response.data.id;
+        this.resetModal();
+      } catch (error) {
+        handleAxiosError(error);
+      } finally {
+        this.saveLoading = false;
+      }
+    },
     async handleSubmit() {
-      const { isValid, erros } = validate(this.fields);
-      this.erros = erros;
+      let fields = { ...this.fields };
+      delete fields.newLote;
+      const { isValid, erros } = validate(fields);
+      this.errors = erros;
       if (!isValid) return;
       this.loading = true;
 
@@ -109,15 +177,28 @@ export default {
             moduloId: this.$route.params.id,
             ...payload,
           });
+          this.$router.push("/modules");
         } else {
-          await this.$http.post("/Modulo/Cadastrar", payload);
+          const response = await this.$http.post("/Modulo/Cadastrar", payload);
+          const moduleId = response.data.id;
+          const confirm = await this.$swal.fire({
+            title: "módulo cadastrado",
+            text: "deseja adicionar itens?",
+            icon: "success",
+            showCancelButton: true,
+            confirmButtonText: "sim, adicionar itens",
+            cancelButtonText: "não",
+            confirmButtonColor: "#315d68",
+            cancelButtonColor: "#363434",
+          });
+          if (confirm.isConfirmed) {
+            this.$router.push(`/modules/${moduleId}/items`);
+          } else {
+            this.$router.push("/modules");
+          }
         }
-        this.$router.push("/modules");
       } catch (error) {
-        this.$store.dispatch("toast/showToast", {
-          message: error.response.data.error,
-          type: "error",
-        });
+        handleAxiosError(error);
       } finally {
         this.loading = false;
       }
@@ -127,7 +208,7 @@ export default {
         const response = await this.$http.get("/Cliente/Listar");
         this.clients = response.data;
       } catch (error) {
-        console.log(error);
+        handleAxiosError(error);
       }
     },
     async getLots() {
@@ -135,7 +216,7 @@ export default {
         const response = await this.$http.get("/Lote/Listar");
         this.lots = response.data;
       } catch (error) {
-        console.log(error);
+        handleAxiosError(error);
       }
     },
     async getModule(id) {
@@ -143,10 +224,10 @@ export default {
         const response = await this.$http.get(`/Modulo/${id}`);
         const data = response.data;
         this.fields.nome = data.nome;
-        this.fields.cliente = data.cliente;
-        this.fields.lote = data.lote;
+        this.fields.cliente = data.clienteId;
+        this.fields.lote = data.loteId;
       } catch (error) {
-        console.log(error);
+        handleAxiosError(error);
       } finally {
         this.loading = false;
       }
@@ -179,6 +260,20 @@ export default {
     .form-group {
       &:not(:last-child) {
         margin-bottom: 16px;
+      }
+    }
+    &__lot {
+      position: relative;
+      z-index: 1;
+      a {
+        position: absolute;
+        right: 0;
+        top: 0;
+        font-size: 0.75em;
+        text-decoration: underline;
+        color: $color-brand;
+        cursor: pointer;
+        z-index: 2;
       }
     }
   }

@@ -18,11 +18,7 @@
           type="password"
         />
       </div>
-      <LoadingButton
-        :text="'salvar'"
-        :loading="loading"
-        @click="handleSubmit"
-      />
+      <LoadingButton :text="'salvar'" :loading="loading" />
     </form>
     <p class="form-create__login">
       <router-link to="/login" class="bar bar--inverse lk"

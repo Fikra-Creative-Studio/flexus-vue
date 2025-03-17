@@ -1,5 +1,5 @@
 <template>
-  <button :class="buttonClass" :disabled="loading || disabled">
+  <button type="submit" :class="buttonClass" :disabled="loading || disabled">
     <span v-if="!loading">{{ text }}</span>
     <span v-else class="loader"></span>
   </button>

@@ -12,6 +12,19 @@ export function formatSelect(array = [], keyName, keyValue) {
   }));
 }
 
+export function formatCPNJ(cnpj) {
+  if (!cnpj) return "";
+  return cnpj.replace(
+    /^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})$/,
+    "$1.$2.$3/$4-$5"
+  );
+}
+
+export function formatDate(date) {
+  const options = { year: "numeric", month: "2-digit", day: "2-digit" };
+  return new Date(date).toLocaleDateString("pt-BR", options);
+}
+
 export function handleAxiosError(error) {
   Swal.fire(
     "Erro",

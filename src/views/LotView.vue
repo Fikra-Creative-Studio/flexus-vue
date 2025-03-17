@@ -1,8 +1,8 @@
 <template>
   <div>
-    <TheHeader title="usuários">
+    <TheHeader title="Lotes">
       <a href="" @click.prevent="handleOpenModal()" class="btn btn--primary">
-        adicionar usuário
+        adicionar lote
       </a>
     </TheHeader>
     <TheLoading v-if="loading" />
@@ -24,42 +24,30 @@
           <thead>
             <tr>
               <th>nome</th>
-              <th>e-mail</th>
               <th>ações</th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="(item, index) in items" :key="index">
               <td>
-                {{ item.nome }} <span class="tag">confirmação pendente</span>
-              </td>
-              <td>
-                {{ item.email }}
+                {{ item.nome }}
               </td>
               <td class="table__buttons">
                 <a
                   href=""
-                  @click.prevent=""
-                  class="confirm"
-                  tooltip="confirmar usuário"
-                >
-                  <i class="flaticon-check"></i>
-                </a>
-                <a
-                  href=""
-                  @click.prevent=""
-                  class="permission"
-                  tooltip="editar permissão"
-                >
-                  <i class="flaticon-permission"></i>
-                </a>
-                <a
-                  href=""
                   @click.prevent="handleOpenModal(item)"
                   class="primary"
-                  tooltip="editar usuário"
+                  tooltip="editar lote"
                 >
                   <i class="flaticon-edit-text"></i>
+                </a>
+                <a
+                  href=""
+                  class="red"
+                  @click.prevent="deleteItem(item.id)"
+                  tooltip="excluir lote"
+                >
+                  <i class="flaticon-trash"></i>
                 </a>
               </td>
             </tr>
@@ -68,11 +56,11 @@
       </div>
       <div v-else>
         <FeedbackMessage class="banner--gold banner--home banner--titled">
-          <h2>nenhum usuário foi adicionado até o momento</h2>
+          <h2>nenhum lote foi adicionado até o momento</h2>
           <p>
-            que tal começar agora? cadastre seu usuário cliente.
+            que tal começar agora? cadastre seu primeiro lote.
             <a href="" @click.prevent="handleOpenModal()" class="lk"
-              >adicionar usuário</a
+              >adicionar módulo</a
             >
           </p>
         </FeedbackMessage>
@@ -80,13 +68,13 @@
     </template>
 
     <TheModal @close="resetModal" modalType="first">
-      <h2>{{ isEdit ? "editar usuário" : "adicionar usuário" }}</h2>
+      <h2>{{ isEdit ? "editar lote" : "adicionar lote" }}</h2>
       <form @submit.prevent="submitItem">
         <div class="modal__form">
           <InputType
             label="nome"
             :error="errors.nome"
-            placeholder="digite o nome do usuário"
+            placeholder="digite o nome do lote"
             v-model="fields.nome"
             type="text"
             class="gold"
@@ -114,7 +102,7 @@ import LoadingButton from "@/components/LoadingButton.vue";
 import InputType from "@/objects/InputType.vue";
 import { handleAxiosError } from "@/utils/utils.js";
 import { validate } from "@/utils/validation.js";
-import { mapActions, mapGetters } from "vuex";
+import { mapActions } from "vuex";
 
 export default {
   data() {
@@ -138,9 +126,6 @@ export default {
       },
     };
   },
-  computed: {
-    ...mapGetters(["getUsuario"]),
-  },
   components: {
     TheModal,
     TheHeader,
@@ -151,47 +136,75 @@ export default {
   },
   methods: {
     ...mapActions("modal", ["openModal", "closeModal"]),
+    async deleteItem(id) {
+      try {
+        const confirm = await this.$swal.fire({
+          title: "excluir?",
+          text: "essa ação não pode ser desfeita!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonText: "sim, excluir!",
+          cancelButtonText: "cancelar",
+          confirmButtonColor: "#a41313",
+          cancelButtonColor: "#363434",
+        });
+
+        if (confirm.isConfirmed) {
+          await this.$http.delete(`/Lote/${id}/Excluir`);
+
+          this.items = this.items.filter(item => item.id !== id);
+
+          this.$swal.fire(
+            "Excluído!",
+            "O lote foi removido com sucesso.",
+            "success"
+          );
+        }
+      } catch (error) {
+        handleAxiosError(error);
+      }
+    },
     async submitItem() {
       const { isValid, erros } = validate(this.fields);
       this.errors = erros;
       if (!isValid) return;
       this.saveLoading = true;
 
-      // try {
-      //   if (this.isEdit) {
-      //     const response = await this.$http.put(`/Cliente/Editar`, {
-      //       id: this.currentItemId,
-      //       ...this.fields,
-      //     });
-      //     const index = this.items.findIndex(
-      //       item => item.id === this.currentItemId
-      //     );
-      //     if (index !== -1) {
-      //       this.items.splice(index, 1, response.data);
-      //       this.$swal.fire(
-      //         "Feito!",
-      //         "O cliente foi atualizado com sucesso.",
-      //         "success"
-      //       );
-      //     }
-      //   } else {
-      //     const response = await this.$http.post(
-      //       "/Cliente/Cadastrar",
-      //       this.fields
-      //     );
-      //     this.items.push(response.data);
-      //     this.$swal.fire(
-      //       "Feito!",
-      //       "O cliente foi cadastrado com sucesso.",
-      //       "success"
-      //     );
-      //   }
-      // } catch (error) {
-      //   handleAxiosError(error);
-      // } finally {
-      //   this.saveLoading = false;
-      //   this.resetModal();
-      // }
+      try {
+        if (this.isEdit) {
+          const response = await this.$http.put(
+            `/Lote/${this.currentItemId}/Editar`,
+            this.fields
+          );
+          const index = this.items.findIndex(
+            item => item.id === this.currentItemId
+          );
+          if (index !== -1) {
+            this.items.splice(index, 1, response.data);
+            this.$swal.fire(
+              "Feito!",
+              "O lote foi atualizado com sucesso.",
+              "success"
+            );
+          }
+        } else {
+          const response = await this.$http.post(
+            "/Lote/Cadastrar",
+            this.fields
+          );
+          this.items.push(response.data);
+          this.$swal.fire(
+            "Feito!",
+            "O lote foi cadastrado com sucesso.",
+            "success"
+          );
+        }
+      } catch (error) {
+        handleAxiosError(error);
+      } finally {
+        this.saveLoading = false;
+        this.resetModal();
+      }
     },
     handleOpenModal(item = null) {
       if (item) {
@@ -211,11 +224,9 @@ export default {
       this.currentItemId = null;
       this.closeModal();
     },
-    async getEmployees() {
+    async getLots() {
       try {
-        const response = await this.$http.get(
-          `/Usuario/Empresa/${this.getUsuario.empresaId}/Listar`
-        );
+        const response = await this.$http.get("/Lote/Listar");
         this.items = response.data;
       } catch (error) {
         handleAxiosError(error);
@@ -224,7 +235,7 @@ export default {
       }
     },
     async init() {
-      await this.getEmployees();
+      await this.getLots();
     },
   },
   created() {

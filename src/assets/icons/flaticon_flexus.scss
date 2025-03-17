@@ -2,11 +2,11 @@ $flaticon_flexus-font: "flaticon_flexus";
 
 @font-face {
     font-family: $flaticon_flexus-font;
-    src: url("./flaticon_flexus.woff2?7959da19aea432e64af4f0e5258b6c6d") format("woff2"),
-url("./flaticon_flexus.woff?7959da19aea432e64af4f0e5258b6c6d") format("woff"),
-url("./flaticon_flexus.eot?7959da19aea432e64af4f0e5258b6c6d#iefix") format("embedded-opentype"),
-url("./flaticon_flexus.ttf?7959da19aea432e64af4f0e5258b6c6d") format("truetype"),
-url("./flaticon_flexus.svg?7959da19aea432e64af4f0e5258b6c6d#flaticon_flexus") format("svg");
+    src: url("./flaticon_flexus.woff2?da911ba2a24ae661acff02a660f3bfdc") format("woff2"),
+url("./flaticon_flexus.woff?da911ba2a24ae661acff02a660f3bfdc") format("woff"),
+url("./flaticon_flexus.eot?da911ba2a24ae661acff02a660f3bfdc#iefix") format("embedded-opentype"),
+url("./flaticon_flexus.ttf?da911ba2a24ae661acff02a660f3bfdc") format("truetype"),
+url("./flaticon_flexus.svg?da911ba2a24ae661acff02a660f3bfdc#flaticon_flexus") format("svg");
 }
 
 i[class^="flaticon-"]:before, i[class*=" flaticon-"]:before {
@@ -32,6 +32,13 @@ $flaticon_flexus-map: (
     "x": "\f109",
     "chevron-down": "\f10a",
     "down-arrow": "\f10b",
+    "check": "\f10c",
+    "access-granted": "\f10d",
+    "permission": "\f10e",
+    "manager": "\f10f",
+    "user-avatar": "\f110",
+    "like": "\f111",
+    "check-1": "\f112",
 );
 
 .flaticon-export:before {
@@ -66,4 +73,25 @@ $flaticon_flexus-map: (
 }
 .flaticon-down-arrow:before {
     content: map-get($flaticon_flexus-map, "down-arrow");
+}
+.flaticon-check:before {
+    content: map-get($flaticon_flexus-map, "check");
+}
+.flaticon-access-granted:before {
+    content: map-get($flaticon_flexus-map, "access-granted");
+}
+.flaticon-permission:before {
+    content: map-get($flaticon_flexus-map, "permission");
+}
+.flaticon-manager:before {
+    content: map-get($flaticon_flexus-map, "manager");
+}
+.flaticon-user-avatar:before {
+    content: map-get($flaticon_flexus-map, "user-avatar");
+}
+.flaticon-like:before {
+    content: map-get($flaticon_flexus-map, "like");
+}
+.flaticon-check-1:before {
+    content: map-get($flaticon_flexus-map, "check-1");
 }

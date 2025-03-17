@@ -51,11 +51,7 @@
           type="text"
         />
       </div>
-      <LoadingButton
-        :text="'cadastrar'"
-        :loading="loading"
-        @click="handleCreate"
-      />
+      <LoadingButton :text="'cadastrar'" :loading="loading" />
     </form>
     <p class="form-create__login">
       <router-link to="/login" class="bar bar--inverse lk"

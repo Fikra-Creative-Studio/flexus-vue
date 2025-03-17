@@ -1,6 +1,7 @@
 import { createStore } from "vuex";
 import VueCookies from "vue-cookies";
 import toast from "./modules/toast";
+import modal from "./modules/modal";
 
 export default createStore({
   state: {
@@ -55,5 +56,6 @@ export default createStore({
   },
   modules: {
     toast,
+    modal,
   },
 });

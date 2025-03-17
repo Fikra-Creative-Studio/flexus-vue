@@ -6,7 +6,6 @@ import { mask } from "vue-the-mask";
 import axios from "axios";
 import VueCookies from "vue-cookies";
 import Swal from "sweetalert2";
-
 const app = createApp(App);
 
 app.directive("mask", mask);

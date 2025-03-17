@@ -12,6 +12,8 @@ import StepsView from "../views/StepsView.vue";
 import CompaniesView from "../views/CompaniesView.vue";
 import EmployeesView from "../views/EmployeesView.vue";
 import ClientsView from "../views/ClientsView.vue";
+import LotView from "../views/LotView.vue";
+import AccountView from "../views/AccountView.vue";
 
 const routes = [
   {
@@ -60,9 +62,19 @@ const routes = [
     component: ItemView,
   },
   {
-    path: "/empresas",
-    name: "empresas",
+    path: "/lotes",
+    name: "lotes",
+    component: LotView,
+  },
+  {
+    path: "/companies",
+    name: "companies",
     component: CompaniesView,
+  },
+  {
+    path: "/account",
+    name: "account",
+    component: AccountView,
   },
   {
     path: "/funcionarios",

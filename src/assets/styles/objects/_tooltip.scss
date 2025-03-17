@@ -1,0 +1,26 @@
+@use "../variables" as *;
+a[tooltip] {
+  position: relative;
+  cursor: pointer;
+  &:not(.disabled) {
+    &::after {
+      content: attr(tooltip);
+      position: absolute;
+      bottom: 120%;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: $color-black;
+      color: $color-white;
+      padding: 5px 10px;
+      border-radius: 4px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease-in-out;
+      font-size: 12px;
+    }
+    &:hover::after {
+      opacity: 1;
+    }
+  }
+}

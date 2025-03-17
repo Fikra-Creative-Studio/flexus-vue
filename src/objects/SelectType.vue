@@ -21,11 +21,13 @@
         v-model="search"
         placeholder="pesquise..."
         class="select__search"
+        v-if="activeSearch"
       />
       <ul>
         <li
           v-for="(item, index) in filteredItems"
           @click="setItem(item)"
+          :class="{ active: item.value == modelValue }"
           :key="index"
         >
           {{ item.name }}
@@ -56,6 +58,10 @@ export default {
     error: {
       type: Object,
       default: () => ({ status: false, msg: "" }),
+    },
+    activeSearch: {
+      type: Boolean,
+      default: true,
     },
     placeholder: String,
     modelValue: [String, Number],
@@ -227,9 +233,14 @@ export default {
     }
   }
   &--error {
-    .select__selected input {
-      border-color: $color-red;
-      padding-right: 25px;
+    .select__selected {
+      i {
+        right: 18px;
+      }
+      input {
+        border-color: $color-red;
+        padding-right: 25px;
+      }
     }
     label {
       color: $color-red;

@@ -17,10 +17,12 @@ export default {
     return {
       items: [
         { page: "modules", name: "módulos", permissao: 1 },
+        { page: "lotes", name: "lotes", permissao: 1 },
         { page: "etapas", name: "etapas", permissao: 1 },
-        { page: "empresas", name: "empresas", permissao: 10 },
-        { page: "funcionarios", name: "funcionários", permissao: 1 },
+        { page: "companies", name: "empresas", permissao: 10 },
+        { page: "funcionarios", name: "usuários", permissao: 1 },
         { page: "clientes", name: "clientes", permissao: 1 },
+        { page: "account", name: "minha conta", permissao: 1 },
       ],
     };
   },
@@ -38,37 +40,58 @@ export default {
         margin-bottom: 8px;
       }
       &:nth-child(1) {
-        a.router-link-active {
+        a.router-link-active,
+        a:hover {
           span {
             width: calc(100% - 110px);
           }
         }
       }
       &:nth-child(2) {
-        a.router-link-active {
+        a.router-link-active,
+        a:hover {
+          span {
+            width: calc(100% - 70px);
+          }
+        }
+      }
+      &:nth-child(3) {
+        a.router-link-active,
+        a:hover {
           span {
             width: calc(100% - 90px);
           }
         }
       }
-      &:nth-child(3) {
-        a.router-link-active {
+      &:nth-child(4) {
+        a.router-link-active,
+        a:hover {
           span {
             width: calc(100% - 120px);
           }
         }
       }
-      &:nth-child(4) {
-        a.router-link-active {
+      &:nth-child(5) {
+        a.router-link-active,
+        a:hover {
           span {
-            width: calc(100% - 140px);
+            width: calc(100% - 110px);
           }
         }
       }
-      &:nth-child(5) {
-        a.router-link-active {
+      &:nth-child(6) {
+        a.router-link-active,
+        a:hover {
           span {
             width: calc(100% - 100px);
+          }
+        }
+      }
+      &:nth-child(7) {
+        a.router-link-active,
+        a:hover {
+          span {
+            width: calc(100% - 140px);
           }
         }
       }

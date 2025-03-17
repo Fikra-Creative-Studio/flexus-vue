@@ -17,7 +17,7 @@
         />
       </div>
 
-      <LoadingButton :text="'salvar'" :loading="loading" @click="handleCNPJ" />
+      <LoadingButton :text="'salvar'" :loading="loading" />
     </form>
     <p class="form-cnpj__leave">
       fique tranquilo, enviaremos um e-mail quando seu acesso estiver pronto.

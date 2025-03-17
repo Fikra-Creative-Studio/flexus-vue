@@ -25,6 +25,7 @@
               <SelectType
                 v-if="clients.length"
                 label=""
+                :activeSearch="items.length > 10"
                 :error="errors.cliente"
                 placeholder="selecione o cliente"
                 v-model="fields.cliente"
@@ -33,6 +34,7 @@
               <SelectType
                 v-if="lots.length"
                 label=""
+                :activeSearch="items.length > 10"
                 :error="errors.lote"
                 placeholder="selecione o lote"
                 v-model="fields.lote"
@@ -40,6 +42,7 @@
               />
               <SelectType
                 label=""
+                :activeSearch="false"
                 :error="errors.status"
                 placeholder="selecione o status"
                 v-model="fields.status"
@@ -52,6 +55,7 @@
                 href=""
                 @click.prevent
                 class="btn btn--black btn--iconed"
+                tooltip="exportar lote selecionado"
                 v-if="fields.lote"
               >
                 <i class="flaticon-export-1"></i>
@@ -82,13 +86,24 @@
                 <router-link
                   :to="{ name: 'items', params: { id: item.id } }"
                   class="primary"
+                  tooltip="editar modulo"
                 >
                   <i class="flaticon-edit-text"></i>
                 </router-link>
-                <a href="" class="black" @click.prevent="">
+                <a
+                  href=""
+                  class="black"
+                  @click.prevent=""
+                  tooltip="exportar modulo"
+                >
                   <i class="flaticon-export-1"></i>
                 </a>
-                <a href="" class="red" @click.prevent="deleteItem(item.id)">
+                <a
+                  href=""
+                  class="red"
+                  @click.prevent="deleteItem(item.id)"
+                  tooltip="excluir modulo"
+                >
                   <i class="flaticon-trash"></i>
                 </a>
               </td>
@@ -192,13 +207,13 @@ export default {
         });
 
         if (confirm.isConfirmed) {
-          await this.$http.delete(`/Modulo/Excluir?moduloId=${id}`);
+          await this.$http.delete(`/Modulo/${id}/Excluir`);
 
           this.items = this.items.filter(item => item.id !== id);
 
           this.$swal.fire(
             "Excluído!",
-            "O módulo removido com sucesso.",
+            "O módulo foi removido com sucesso.",
             "success"
           );
         }

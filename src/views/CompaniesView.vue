@@ -25,7 +25,6 @@
             <tr>
               <th>razão social</th>
               <th>cnpj</th>
-              <th>plano</th>
               <th>valor</th>
               <th>vencimento</th>
               <th>ações</th>
@@ -37,17 +36,23 @@
                 {{ item.razao }}
               </td>
               <td>{{ cnpjFormated(item.cnpj) }}</td>
-              <td>{{ item.plano }}</td>
               <td>R$ {{ item.valor }}</td>
               <td>{{ dateFormated(item.vencimento) }}</td>
               <td class="table__buttons">
+                <router-link
+                  :to="{ name: 'companies-users', params: { id: item.id } }"
+                  class="black"
+                  tooltip="mostrar usuários"
+                >
+                  <i class="flaticon-group"></i>
+                </router-link>
                 <a
                   href=""
                   @click.prevent="handleOpenModal(item)"
                   class="primary"
                   tooltip="editar empresa"
                 >
-                  <i class="flaticon-edit-text"></i>
+                  <i class="flaticon-pencil"></i>
                 </a>
               </td>
             </tr>
@@ -83,14 +88,6 @@
             placeholder="00.000.000/0000-00"
             v-model="fields.cnpj"
             mask="##.###.###/####-##"
-            type="text"
-            class="gold"
-          />
-          <InputType
-            label="plano"
-            :error="errors.plano"
-            placeholder="digite o plano"
-            v-model="fields.plano"
             type="text"
             class="gold"
           />
@@ -131,7 +128,12 @@ import FeedbackMessage from "@/components/FeedbackMessage.vue";
 import TheLoading from "@/components/TheLoading.vue";
 import LoadingButton from "@/components/LoadingButton.vue";
 import InputType from "@/objects/InputType.vue";
-import { formatCPNJ, formatDate, handleAxiosError } from "@/utils/utils.js";
+import {
+  formatCPNJ,
+  formatDate,
+  formatDateToISO,
+  handleAxiosError,
+} from "@/utils/utils.js";
 import { validate } from "@/utils/validation.js";
 import { mapActions } from "vuex";
 
@@ -151,7 +153,6 @@ export default {
         extensao: "",
         razao: null,
         cnpj: null,
-        plano: null,
         vencimento: null,
         valor: null,
       },
@@ -161,10 +162,6 @@ export default {
           msg: null,
         },
         cnpj: {
-          status: false,
-          msg: null,
-        },
-        plano: {
           status: false,
           msg: null,
         },
@@ -199,10 +196,8 @@ export default {
       let required = { ...this.fields };
       delete required.logo;
       delete required.extensao;
-      console.log(required);
       const { isValid, erros } = validate(required);
       this.errors = erros;
-      console.log(this.errors);
       if (!isValid) return;
       this.saveLoading = true;
 
@@ -216,17 +211,19 @@ export default {
             `/Empresa/AtualizarPlanos`,
             {
               empresaId: this.currentItemId,
-              plano: this.fields.plano,
               valor: this.fields.valor,
               vencimento: this.fields.vencimento,
             }
           );
-          console.log(responsePlans);
           const index = this.items.findIndex(
             item => item.id === this.currentItemId
           );
           if (index !== -1) {
-            this.items.splice(index, 1, response.data);
+            this.items.splice(index, 1, {
+              ...response.data,
+              valor: responsePlans.data.valor,
+              vencimento: responsePlans.data.vencimento,
+            });
             this.$swal.fire(
               "Feito!",
               "A empresa foi atualizada com sucesso.",
@@ -235,7 +232,6 @@ export default {
           }
         } else {
           const response = await this.$http.post("/Empresa/Criar", this.fields);
-          console.log(this.fields);
           this.items.push(response.data);
           this.$swal.fire(
             "Feito!",
@@ -255,15 +251,13 @@ export default {
         this.isEdit = true;
         this.fields.razao = item.razao;
         this.fields.cnpj = item.cnpj;
-        this.fields.plano = item.plano;
         this.fields.valor = item.valor;
-        this.fields.vencimento = item.vencimento;
+        this.fields.vencimento = formatDateToISO(item.vencimento);
         this.currentItemId = item.id;
       } else {
         this.isEdit = false;
         this.fields.razao = null;
         this.fields.cnpj = null;
-        this.fields.plano = null;
         this.fields.valor = null;
         this.fields.vencimento = null;
         this.currentItemId = null;
@@ -274,7 +268,6 @@ export default {
       this.isEdit = false;
       this.fields.razao = null;
       this.fields.cnpj = null;
-      this.fields.plano = null;
       this.fields.valor = null;
       this.fields.vencimento = null;
       this.currentItemId = null;

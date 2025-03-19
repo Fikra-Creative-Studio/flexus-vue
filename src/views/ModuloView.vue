@@ -88,7 +88,7 @@
                   class="primary"
                   tooltip="editar modulo"
                 >
-                  <i class="flaticon-edit-text"></i>
+                  <i class="flaticon-pencil"></i>
                 </router-link>
                 <a
                   href=""

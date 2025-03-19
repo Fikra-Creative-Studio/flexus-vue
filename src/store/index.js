@@ -5,10 +5,12 @@ import modal from "./modules/modal";
 
 export default createStore({
   state: {
+    empresaLogo: null,
     usuario: VueCookies.get("usuario"),
     token: VueCookies.get("token") || null,
   },
   getters: {
+    getEmpresaLogo: state => state.empresaLogo,
     getUsuario(state) {
       return state.usuario || {};
     },
@@ -17,6 +19,9 @@ export default createStore({
     },
   },
   mutations: {
+    setEmpresaLogo(state, logo) {
+      state.empresaLogo = logo;
+    },
     setUsuario(state, usuario) {
       state.usuario = usuario;
       VueCookies.set("usuario", JSON.stringify(usuario));
@@ -34,6 +39,9 @@ export default createStore({
     },
   },
   actions: {
+    updateEmpresaLogo({ commit }, logo) {
+      commit("setEmpresaLogo", logo);
+    },
     login({ commit }, { usuario, token }) {
       commit("setUsuario", usuario);
       commit("setToken", token);

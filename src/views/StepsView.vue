@@ -54,7 +54,7 @@
                   class="primary"
                   tooltip="editar etapa"
                 >
-                  <i class="flaticon-edit-text"></i>
+                  <i class="flaticon-pencil"></i>
                 </a>
               </td>
             </tr>
@@ -83,6 +83,7 @@
             :activeSearch="false"
             :items="statusFields"
             :current="fields.ativo"
+            class="gold"
           />
         </div>
         <div class="modal__buttons">

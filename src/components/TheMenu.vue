@@ -1,7 +1,15 @@
 <template>
   <nav class="menu">
     <ul>
-      <li v-for="(item, index) in items" :key="index">
+      <li
+        v-for="(item, index) in items"
+        :key="index"
+        v-show="
+          getUsuario.nivelAcesso >= item.permissao &&
+          getUsuario.nivelAcesso == 10 &&
+          item.page !== 'users'
+        "
+      >
         <router-link :to="{ name: item.page }">
           {{ item.name }}
           <span></span>
@@ -12,6 +20,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   data() {
     return {
@@ -19,12 +28,15 @@ export default {
         { page: "modules", name: "módulos", permissao: 1 },
         { page: "lotes", name: "lotes", permissao: 1 },
         { page: "etapas", name: "etapas", permissao: 1 },
-        { page: "companies", name: "empresas", permissao: 10 },
-        { page: "funcionarios", name: "usuários", permissao: 1 },
         { page: "clientes", name: "clientes", permissao: 1 },
+        { page: "companies", name: "empresas", permissao: 10 },
+        { page: "users", name: "usuários", permissao: 5 },
         { page: "account", name: "minha conta", permissao: 1 },
       ],
     };
+  },
+  computed: {
+    ...mapGetters(["getUsuario"]),
   },
 };
 </script>

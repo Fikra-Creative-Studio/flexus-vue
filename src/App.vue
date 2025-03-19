@@ -48,7 +48,7 @@
         "
       >
         <figure>
-          <img src="@/assets/img/demo-fikra.png" alt="" />
+          <img :src="empresaLogo" alt="Logo da empresa" />
         </figure>
         <div class="company__content">
           <p>
@@ -71,7 +71,7 @@ import FormForgotPassword from "@/components/FormForgotPassword.vue";
 import FormResetPassword from "@/components/FormResetPassword.vue";
 import TheMenu from "@/components/TheMenu.vue";
 import ModuloCreate from "@/components/ModuloCreate.vue";
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   data() {
@@ -90,7 +90,10 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["getUsuario"]),
+    ...mapGetters(["getUsuario", "getEmpresaLogo"]),
+    empresaLogo() {
+      return this.getEmpresaLogo;
+    },
   },
   components: {
     FormLogin,
@@ -100,6 +103,30 @@ export default {
     FormResetPassword,
     TheMenu,
     ModuloCreate,
+  },
+  methods: {
+    ...mapActions(["updateEmpresaLogo"]),
+    async getImage() {
+      try {
+        const response = await this.$http.get(
+          `Empresa/${this.getUsuario.empresaId}/Imagens`,
+          { responseType: "arraybuffer" }
+        );
+        const base64Image = btoa(
+          new Uint8Array(response.data).reduce(
+            (data, byte) => data + String.fromCharCode(byte),
+            ""
+          )
+        );
+        const image = `data:image/png;base64,${base64Image}`;
+        this.updateEmpresaLogo(image);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  },
+  created() {
+    this.getImage();
   },
 };
 </script>

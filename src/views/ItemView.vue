@@ -75,7 +75,7 @@
                       @click.prevent="handleOpenModal(item)"
                       tooltip="editar item"
                     >
-                      <i class="flaticon-edit-text"></i>
+                      <i class="flaticon-pencil"></i>
                     </a>
                     <a
                       href=""

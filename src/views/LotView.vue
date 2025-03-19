@@ -39,7 +39,7 @@
                   class="primary"
                   tooltip="editar lote"
                 >
-                  <i class="flaticon-edit-text"></i>
+                  <i class="flaticon-pencil"></i>
                 </a>
                 <a
                   href=""

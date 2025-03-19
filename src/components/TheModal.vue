@@ -69,6 +69,13 @@ export default {
         margin-bottom: 16px;
       }
     }
+    &__row {
+      display: flex;
+      gap: 20px;
+      .form-group {
+        margin-bottom: 20px;
+      }
+    }
   }
   &__buttons {
     display: flex;

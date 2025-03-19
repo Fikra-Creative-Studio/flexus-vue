@@ -41,6 +41,16 @@ app.config.globalProperties.$swal = Swal;
 
 router.beforeEach((to, from, next) => {
   const token = VueCookies.get("token");
+  const usuario = VueCookies.get("usuario");
+  let nivelAcesso = 0;
+  if (usuario) {
+    try {
+      nivelAcesso = usuario.nivelAcesso;
+    } catch (e) {
+      console.error("Erro ao parsear o cookie 'usuario':", e);
+    }
+  }
+
   if (
     !token &&
     ![
@@ -53,6 +63,13 @@ router.beforeEach((to, from, next) => {
     ].includes(to.path)
   ) {
     next("/login");
+  } else if (token && to.name === "users" && nivelAcesso < 5) {
+    next("/");
+  } else if (
+    ((token && to.name === "companies") || to.name === "companies-users") &&
+    nivelAcesso !== 10
+  ) {
+    next("/");
   } else {
     next();
   }

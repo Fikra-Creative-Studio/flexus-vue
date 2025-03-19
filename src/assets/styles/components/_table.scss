@@ -40,6 +40,9 @@
           strong {
             font-weight: 600;
           }
+          &--black {
+            background-color: $color-black;
+          }
         }
       }
     }

@@ -72,13 +72,18 @@ const routes = [
     component: CompaniesView,
   },
   {
+    path: "/companies/:id",
+    name: "companies-users",
+    component: EmployeesView,
+  },
+  {
     path: "/account",
     name: "account",
     component: AccountView,
   },
   {
-    path: "/funcionarios",
-    name: "funcionarios",
+    path: "/usuarios",
+    name: "users",
     component: EmployeesView,
   },
   {

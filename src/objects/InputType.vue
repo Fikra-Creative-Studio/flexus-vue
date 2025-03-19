@@ -2,12 +2,20 @@
   <div class="form-group" :class="{ 'form-group--error': error.status }">
     <label class="normal" v-if="label">{{ label }}</label>
     <input
+      v-if="type === 'file'"
       :type="type"
       :placeholder="placeholder"
-      v-if="mask"
+      @change="handleFileChange"
+      :disabled="disabled"
+    />
+    <input
+      v-else-if="mask"
+      :type="type"
+      :placeholder="placeholder"
       v-mask="mask"
       :value="modelValue"
       @input="$emit('update:modelValue', $event.target.value)"
+      :disabled="disabled"
     />
     <input
       v-else
@@ -15,6 +23,7 @@
       :placeholder="placeholder"
       :value="modelValue"
       @input="$emit('update:modelValue', $event.target.value)"
+      :disabled="disabled"
     />
     <span>
       <i class="flaticon-exclamation"></i>
@@ -40,8 +49,18 @@ export default {
       type: String,
       default: "text",
     },
-    modelValue: [String, Number],
+    modelValue: [String, Number, File],
     tooltip: String,
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  methods: {
+    handleFileChange(event) {
+      const file = event.target.files[0];
+      this.$emit("update:modelValue", file);
+    },
   },
 };
 </script>
@@ -72,6 +91,11 @@ export default {
     &::placeholder {
       font-size: 0.875em;
       color: $color-gray-light;
+    }
+    &[disabled] {
+      background-color: $color-background !important;
+      color: $color-gray-light;
+      cursor: not-allowed;
     }
   }
   span {

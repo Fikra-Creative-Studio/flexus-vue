@@ -1,97 +1,115 @@
 $flaticon_flexus-font: "flaticon_flexus";
 
 @font-face {
-    font-family: $flaticon_flexus-font;
-    src: url("./flaticon_flexus.woff2?da911ba2a24ae661acff02a660f3bfdc") format("woff2"),
-url("./flaticon_flexus.woff?da911ba2a24ae661acff02a660f3bfdc") format("woff"),
-url("./flaticon_flexus.eot?da911ba2a24ae661acff02a660f3bfdc#iefix") format("embedded-opentype"),
-url("./flaticon_flexus.ttf?da911ba2a24ae661acff02a660f3bfdc") format("truetype"),
-url("./flaticon_flexus.svg?da911ba2a24ae661acff02a660f3bfdc#flaticon_flexus") format("svg");
+  font-family: $flaticon_flexus-font;
+  src: url("./flaticon_flexus.woff2?b5a84096f8088fc3763fa163afeebf04")
+      format("woff2"),
+    url("./flaticon_flexus.woff?b5a84096f8088fc3763fa163afeebf04")
+      format("woff"),
+    url("./flaticon_flexus.eot?b5a84096f8088fc3763fa163afeebf04#iefix")
+      format("embedded-opentype"),
+    url("./flaticon_flexus.ttf?b5a84096f8088fc3763fa163afeebf04")
+      format("truetype"),
+    url("./flaticon_flexus.svg?b5a84096f8088fc3763fa163afeebf04#flaticon_flexus")
+      format("svg");
 }
 
-i[class^="flaticon-"]:before, i[class*=" flaticon-"]:before {
-    font-family: flaticon_flexus !important;
-    font-style: normal;
-    font-weight: normal !important;
-    font-variant: normal;
-    text-transform: none;
-    line-height: 1;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+i[class^="flaticon-"]:before,
+i[class*=" flaticon-"]:before {
+  font-family: flaticon_flexus !important;
+  font-style: normal;
+  font-weight: normal !important;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 $flaticon_flexus-map: (
-    "export": "\f101",
-    "export-1": "\f102",
-    "edit-text": "\f103",
-    "edit": "\f104",
-    "export-2": "\f105",
-    "attention": "\f106",
-    "exclamation": "\f107",
-    "trash": "\f108",
-    "x": "\f109",
-    "chevron-down": "\f10a",
-    "down-arrow": "\f10b",
-    "check": "\f10c",
-    "access-granted": "\f10d",
-    "permission": "\f10e",
-    "manager": "\f10f",
-    "user-avatar": "\f110",
-    "like": "\f111",
-    "check-1": "\f112",
+  "export": "\f101",
+  "export-1": "\f102",
+  "edit-text": "\f103",
+  "edit": "\f104",
+  "export-2": "\f105",
+  "attention": "\f106",
+  "exclamation": "\f107",
+  "trash": "\f108",
+  "x": "\f109",
+  "chevron-down": "\f10a",
+  "down-arrow": "\f10b",
+  "check": "\f10c",
+  "access-granted": "\f10d",
+  "permission": "\f10e",
+  "manager": "\f10f",
+  "user-avatar": "\f110",
+  "like": "\f111",
+  "check-1": "\f112",
+  "pencil": "\f113",
+  "user": "\f114",
+  "group": "\f115",
 );
 
 .flaticon-export:before {
-    content: map-get($flaticon_flexus-map, "export");
+  content: map-get($flaticon_flexus-map, "export");
 }
 .flaticon-export-1:before {
-    content: map-get($flaticon_flexus-map, "export-1");
+  content: map-get($flaticon_flexus-map, "export-1");
 }
-.flaticon-edit-text:before {
-    content: map-get($flaticon_flexus-map, "edit-text");
+.flaticon-pencil:before {
+  content: map-get($flaticon_flexus-map, "edit-text");
 }
 .flaticon-edit:before {
-    content: map-get($flaticon_flexus-map, "edit");
+  content: map-get($flaticon_flexus-map, "edit");
 }
 .flaticon-export-2:before {
-    content: map-get($flaticon_flexus-map, "export-2");
+  content: map-get($flaticon_flexus-map, "export-2");
 }
 .flaticon-attention:before {
-    content: map-get($flaticon_flexus-map, "attention");
+  content: map-get($flaticon_flexus-map, "attention");
 }
 .flaticon-exclamation:before {
-    content: map-get($flaticon_flexus-map, "exclamation");
+  content: map-get($flaticon_flexus-map, "exclamation");
 }
 .flaticon-trash:before {
-    content: map-get($flaticon_flexus-map, "trash");
+  content: map-get($flaticon_flexus-map, "trash");
 }
 .flaticon-x:before {
-    content: map-get($flaticon_flexus-map, "x");
+  content: map-get($flaticon_flexus-map, "x");
 }
 .flaticon-chevron-down:before {
-    content: map-get($flaticon_flexus-map, "chevron-down");
+  content: map-get($flaticon_flexus-map, "chevron-down");
 }
 .flaticon-down-arrow:before {
-    content: map-get($flaticon_flexus-map, "down-arrow");
+  content: map-get($flaticon_flexus-map, "down-arrow");
 }
 .flaticon-check:before {
-    content: map-get($flaticon_flexus-map, "check");
+  content: map-get($flaticon_flexus-map, "check");
 }
 .flaticon-access-granted:before {
-    content: map-get($flaticon_flexus-map, "access-granted");
+  content: map-get($flaticon_flexus-map, "access-granted");
 }
 .flaticon-permission:before {
-    content: map-get($flaticon_flexus-map, "permission");
+  content: map-get($flaticon_flexus-map, "permission");
 }
 .flaticon-manager:before {
-    content: map-get($flaticon_flexus-map, "manager");
+  content: map-get($flaticon_flexus-map, "manager");
 }
 .flaticon-user-avatar:before {
-    content: map-get($flaticon_flexus-map, "user-avatar");
+  content: map-get($flaticon_flexus-map, "user-avatar");
 }
 .flaticon-like:before {
-    content: map-get($flaticon_flexus-map, "like");
+  content: map-get($flaticon_flexus-map, "like");
 }
 .flaticon-check-1:before {
-    content: map-get($flaticon_flexus-map, "check-1");
+  content: map-get($flaticon_flexus-map, "check-1");
+}
+.flaticon-pencil:before {
+  content: map-get($flaticon_flexus-map, "pencil");
+}
+.flaticon-user:before {
+  content: map-get($flaticon_flexus-map, "user");
+}
+.flaticon-group:before {
+  content: map-get($flaticon_flexus-map, "group");
 }

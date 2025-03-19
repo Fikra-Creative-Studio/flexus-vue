@@ -1,14 +1,14 @@
 @font-face {
   font-family: "flaticon_flexus";
-  src: url("/src/assets/icons/flaticon_flexus.woff2?da911ba2a24ae661acff02a660f3bfdc")
+  src: url("/src/assets/icons/flaticon_flexus.woff2?b5a84096f8088fc3763fa163afeebf04")
       format("woff2"),
-    url("/src/assets/icons/flaticon_flexus.woff?da911ba2a24ae661acff02a660f3bfdc")
+    url("/src/assets/icons/flaticon_flexus.woff?b5a84096f8088fc3763fa163afeebf04")
       format("woff"),
-    url("/src/assets/icons/flaticon_flexus.eot?da911ba2a24ae661acff02a660f3bfdc#iefix")
+    url("/src/assets/icons/flaticon_flexus.eot?b5a84096f8088fc3763fa163afeebf04#iefix")
       format("embedded-opentype"),
-    url("/src/assets/icons/flaticon_flexus.ttf?da911ba2a24ae661acff02a660f3bfdc")
+    url("/src/assets/icons/flaticon_flexus.ttf?b5a84096f8088fc3763fa163afeebf04")
       format("truetype"),
-    url("/src/assets/icons/flaticon_flexus.svg?da911ba2a24ae661acff02a660f3bfdc#flaticon_flexus")
+    url("/src/assets/icons/flaticon_flexus.svg?b5a84096f8088fc3763fa163afeebf04#flaticon_flexus")
       format("svg");
 }
 
@@ -77,4 +77,13 @@ i[class*=" flaticon-"]:before {
 }
 .flaticon-check-1:before {
   content: "\f112";
+}
+.flaticon-pencil:before {
+  content: "\f113";
+}
+.flaticon-user:before {
+  content: "\f114";
+}
+.flaticon-group:before {
+  content: "\f115";
 }
